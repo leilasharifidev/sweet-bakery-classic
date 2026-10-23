@@ -1,0 +1,747 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>شیرینی‌خانه لیلی</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="logo" onclick="showPage('home')">
+        <span class="logo-icon">🍰</span>
+        <div>
+          <span class="logo-text">شیرینی‌خانه لیلی</span>
+          <span class="logo-sub">از سال ۱۳۷۵</span>
+        </div>
+      </div>
+      <nav>
+        <a
+          onclick="
+            showPage('home');
+            scrollTo(0, 0);
+          "
+          >خانه</a
+        >
+        <a
+          onclick="
+            showPage('home');
+            setTimeout(
+              () =>
+                document
+                  .getElementById('categories')
+                  .scrollIntoView({ behavior: 'smooth' }),
+              100,
+            );
+          "
+          >دسته‌بندی</a
+        >
+        <a
+          onclick="
+            showPage('home');
+            setTimeout(
+              () =>
+                document
+                  .getElementById('products')
+                  .scrollIntoView({ behavior: 'smooth' }),
+              100,
+            );
+          "
+          >محصولات</a
+        >
+        <a
+          onclick="
+            showPage('home');
+            setTimeout(
+              () =>
+                document
+                  .getElementById('gallery')
+                  .scrollIntoView({ behavior: 'smooth' }),
+              100,
+            );
+          "
+          >گالری</a
+        >
+        <a onclick="showPage('admin')">پنل مدیریت</a>
+      </nav>
+      <div class="header-actions">
+        <button class="search-toggle" onclick="toggleSearch()" title="جستجو">
+          🔍
+        </button>
+        <button class="cart-btn" onclick="openCart()">
+          🛒 سبد خرید
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- SEARCH BAR -->
+    <div class="search-bar" id="searchBar">
+      <input
+        class="search-input"
+        id="searchInput"
+        type="text"
+        placeholder="جستجوی شیرینی..."
+        oninput="doSearch(this.value)"
+      />
+      <button
+        style="
+          background: none;
+          border: none;
+          color: var(--sand);
+          font-size: 1.2rem;
+          cursor: pointer;
+        "
+        onclick="toggleSearch()"
+      >
+        ✕
+      </button>
+    </div>
+    <div class="search-results" id="searchResults"></div>
+
+    <!-- ═══ HOME PAGE ═══ -->
+    <div class="page active" id="page-home">
+      <!-- HERO -->
+      <section class="hero" id="home">
+        <div class="hero-text">
+          <span class="hero-badge">✨ بهترین شیرینی‌های سنتی</span>
+          <h1>طعمی که <span>فراموش نمی‌شود</span></h1>
+          <p>
+            شیرینی‌های دست‌پخت ما با عشق و بهترین مواد اولیه تهیه می‌شوند. از
+            باقلوا تا کیک خامه‌ای، هر لقمه یک تجربه بی‌نظیر است.
+          </p>
+          <div class="hero-cta">
+            <button
+              class="btn-primary"
+              onclick="
+                document
+                  .getElementById('products')
+                  .scrollIntoView({ behavior: 'smooth' })
+              "
+            >
+              همین الان بخرید
+            </button>
+            <button
+              class="btn-outline"
+              onclick="
+                document
+                  .getElementById('gallery')
+                  .scrollIntoView({ behavior: 'smooth' })
+              "
+            >
+              مشاهده گالری
+            </button>
+          </div>
+        </div>
+        <div class="hero-visual"><div class="hero-circle">🎂</div></div>
+      </section>
+
+      <!-- STATS -->
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">+۵۰۰</div>
+          <div class="stat-label">نوع شیرینی</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">+۱۲۰۰۰</div>
+          <div class="stat-label">مشتری راضی</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">۴۸</div>
+          <div class="stat-label">ساعت تحویل</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">۵۰</div>
+          <div class="stat-label">سال تجربه</div>
+        </div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <section class="categories" id="categories">
+        <div class="section-header reveal">
+          <span class="section-tag">دسته‌بندی محصولات</span>
+          <h2 class="section-title">چه <span>شیرینی‌ای</span> دوست دارید؟</h2>
+        </div>
+        <div class="cat-grid reveal">
+          <div class="cat-card" onclick="filterProducts('traditional')">
+            <span class="cat-icon">🥮</span>
+            <div class="cat-name">شیرینی سنتی</div>
+            <div class="cat-count">۸۵ محصول</div>
+          </div>
+          <div class="cat-card" onclick="filterProducts('cake')">
+            <span class="cat-icon">🎂</span>
+            <div class="cat-name">کیک و تارت</div>
+            <div class="cat-count">۱۲۰ محصول</div>
+          </div>
+          <div class="cat-card" onclick="filterProducts('chocolate')">
+            <span class="cat-icon">🍫</span>
+            <div class="cat-name">شکلات</div>
+            <div class="cat-count">۶۰ محصول</div>
+          </div>
+          <div class="cat-card" onclick="filterProducts('ice')">
+            <span class="cat-icon">🍦</span>
+            <div class="cat-name">بستنی و ژله</div>
+            <div class="cat-count">۴۵ محصول</div>
+          </div>
+          <div class="cat-card" onclick="filterProducts('cookie')">
+            <span class="cat-icon">🍪</span>
+            <div class="cat-name">کوکی و بیسکویت</div>
+            <div class="cat-count">۹۵ محصول</div>
+          </div>
+          <div class="cat-card" onclick="filterProducts('special')">
+            <span class="cat-icon">🎁</span>
+            <div class="cat-name">سفارش ویژه</div>
+            <div class="cat-count">بدون محدودیت</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section class="products-section" id="products">
+        <div class="section-header reveal">
+          <span class="section-tag">محصولات ما</span>
+          <h2 class="section-title">پرفروش‌ترین <span>شیرینی‌ها</span></h2>
+        </div>
+        <div class="filter-bar reveal">
+          <button class="filter-btn active" onclick="setFilter(this, 'all')">
+            همه
+          </button>
+          <button class="filter-btn" onclick="setFilter(this, 'traditional')">
+            سنتی
+          </button>
+          <button class="filter-btn" onclick="setFilter(this, 'cake')">
+            کیک
+          </button>
+          <button class="filter-btn" onclick="setFilter(this, 'chocolate')">
+            شکلات
+          </button>
+          <button class="filter-btn" onclick="setFilter(this, 'cookie')">
+            کوکی
+          </button>
+        </div>
+        <div class="products-grid" id="productsGrid"></div>
+      </section>
+
+      <!-- GALLERY -->
+      <section class="gallery-section" id="gallery">
+        <div class="section-header reveal">
+          <span class="section-tag">گالری تصاویر</span>
+          <h2 class="section-title">لحظه‌های <span>شیرین</span> ما</h2>
+          <p class="section-sub">نگاهی به آثار هنری شیرینی‌خانه لیلی</p>
+        </div>
+        <div class="gallery-grid reveal" id="galleryGrid"></div>
+      </section>
+
+      <!-- SPECIAL OFFER -->
+      <section class="offer-section" id="offer">
+        <div class="offer-text">
+          <span class="section-tag">⚡ پیشنهاد ویژه امروز</span>
+          <h2 class="section-title">
+            ۳۰٪ تخفیف روی <span style="color: var(--gold)">کیک‌های ویژه</span>
+          </h2>
+          <p>
+            فقط امروز! تمامی کیک‌های خامه‌ای و تولد با ۳۰ درصد تخفیف. همین الان
+            سفارش دهید.
+          </p>
+          <div class="countdown">
+            <div class="cd-box">
+              <div class="cd-num" id="cdS">30</div>
+              <div class="cd-label">ثانیه</div>
+            </div>
+
+            <div class="cd-box">
+              <div class="cd-num" id="cdM">45</div>
+              <div class="cd-label">دقیقه</div>
+            </div>
+            <div class="cd-box">
+              <div class="cd-num" id="cdH">08</div>
+              <div class="cd-label">ساعت</div>
+            </div>
+          </div>
+          <br />
+          <button
+            class="btn-primary"
+            style="margin-top: 16px"
+            onclick="
+              filterProducts('cake');
+              document
+                .getElementById('products')
+                .scrollIntoView({ behavior: 'smooth' });
+            "
+          >
+            استفاده از تخفیف
+          </button>
+        </div>
+        <div class="offer-visual">🍰</div>
+      </section>
+
+      <!-- TESTIMONIALS + RATING -->
+      <section class="testimonials" id="testimonials">
+        <div class="section-header reveal">
+          <span class="section-tag">نظر مشتریان</span>
+          <h2 class="section-title">مشتریان ما چه <span>می‌گویند؟</span></h2>
+        </div>
+        <div class="test-grid reveal" id="reviewsGrid"></div>
+        <!-- ADD REVIEW -->
+        <div
+          style="
+            max-width: 600px;
+            margin: 50px auto 0;
+            background: var(--white);
+            border-radius: 24px;
+            padding: 32px;
+          "
+          class="reveal"
+        >
+          <h3
+            style="font-weight: 800; color: var(--brown); margin-bottom: 20px"
+          >
+            نظر خود را بنویسید ✍️
+          </h3>
+          <div class="star-input" id="starInput">
+            <span onclick="setRating(1)">★</span
+            ><span onclick="setRating(2)">★</span>
+            <span onclick="setRating(3)">★</span
+            ><span onclick="setRating(4)">★</span>
+            <span onclick="setRating(5)">★</span>
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 12px;
+              margin-bottom: 12px;
+            "
+          >
+            <input class="form-input" id="reviewName" placeholder="نام شما" />
+            <input class="form-input" id="reviewCity" placeholder="شهر" />
+          </div>
+          <textarea
+            class="form-textarea"
+            id="reviewText"
+            placeholder="تجربه شما از خرید..."
+            style="width: 100%; margin-bottom: 12px"
+          ></textarea>
+          <button class="btn-primary" onclick="submitReview()">ثبت نظر</button>
+        </div>
+      </section>
+
+      <!-- NEWSLETTER -->
+      <section class="newsletter">
+        <h2>عضو خبرنامه ما شوید</h2>
+        <p>اول از همه از تخفیف‌ها و محصولات جدید باخبر شوید</p>
+        <div class="nl-form">
+          <input
+            class="nl-input"
+            type="email"
+            placeholder="ایمیل شما..."
+            dir="ltr"
+          />
+          <button class="nl-btn" onclick="showToast('✅ ثبت‌نام موفق!')">
+            عضویت
+          </button>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="logo-text" style="color: var(--gold)"
+              >🍰 شیرینی‌خانه لیلی</span
+            >
+            <p>
+              با بیش از ۵۰ سال سابقه، بهترین شیرینی‌های دست‌ساز را با عشق برای
+              شما تهیه می‌کنیم.
+            </p>
+            <div class="social-icons">
+              <a href="#">📸</a><a href="#">💬</a><a href="#">📞</a
+              ><a href="#">🐦</a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>محصولات</h4>
+            <ul>
+              <li>
+                <a onclick="filterProducts('traditional')">شیرینی سنتی</a>
+              </li>
+              <li><a onclick="filterProducts('cake')">کیک و تارت</a></li>
+              <li><a onclick="filterProducts('chocolate')">شکلات</a></li>
+              <li><a onclick="filterProducts('cookie')">کوکی</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>راهنما</h4>
+            <ul>
+              <li><a href="#">نحوه سفارش</a></li>
+              <li><a href="#">شرایط ارسال</a></li>
+              <li><a href="#">سیاست مرجوعی</a></li>
+              <li><a href="#">سوالات متداول</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>تماس با ما</h4>
+            <ul>
+              <li><a>021-88776655</a></li>
+              <li><a>info@liliii-shirini.ir</a></li>
+              <li><a>تهران، خیابان ولیعصر</a></li>
+              <li><a>شنبه تا پنجشنبه</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© ۱۴۰۳ شیرینی‌خانه لیلی — تمامی حقوق محفوظ است</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ═══ CHECKOUT PAGE ═══ -->
+    <div class="page" id="page-checkout">
+      <div class="checkout-page">
+        <div class="back-btn" onclick="showPage('home')">
+          ← بازگشت به فروشگاه
+        </div>
+        <h2>🛒 تکمیل سفارش</h2>
+        <div class="checkout-grid">
+          <div>
+            <!-- اطلاعات شخصی -->
+            <div class="checkout-form-section" style="margin-bottom: 24px">
+              <h3>👤 اطلاعات تحویل گیرنده</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">نام</label
+                  ><input
+                    class="form-input"
+                    id="fname"
+                    placeholder="نام خود را وارد کنید"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">نام خانوادگی</label
+                  ><input
+                    class="form-input"
+                    id="lname"
+                    placeholder="نام خانوادگی"
+                  />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">شماره موبایل</label
+                  ><input
+                    class="form-input"
+                    id="phone"
+                    placeholder="09xxxxxxxxx"
+                    dir="ltr"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">ایمیل (اختیاری)</label
+                  ><input
+                    class="form-input"
+                    id="email"
+                    placeholder="email@example.com"
+                    dir="ltr"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">آدرس کامل</label
+                ><textarea
+                  class="form-textarea"
+                  id="address"
+                  placeholder="استان، شهر، خیابان، پلاک، واحد..."
+                ></textarea>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">شهر</label
+                  ><input class="form-input" id="city" placeholder="شهر" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">کد پستی</label
+                  ><input
+                    class="form-input"
+                    id="postal"
+                    placeholder="xxxxxxxxxx"
+                    dir="ltr"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">توضیحات سفارش (اختیاری)</label
+                ><textarea
+                  class="form-textarea"
+                  id="notes"
+                  placeholder="مثلاً: بدون پیاز، تحویل بعد از ظهر..."
+                ></textarea>
+              </div>
+            </div>
+            <!-- روش تحویل -->
+            <div class="checkout-form-section" style="margin-bottom: 24px">
+              <h3>🚚 روش تحویل</h3>
+              <div class="delivery-options">
+                <label
+                  class="delivery-option selected"
+                  id="deliv1"
+                  onclick="selectDelivery(this)"
+                >
+                  <input type="radio" name="delivery" value="express" checked />
+                  <div>
+                    <div class="delivery-label">🚀 تحویل اکسپرس (همان روز)</div>
+                    <div class="delivery-desc">
+                      در صورت سفارش قبل از ساعت ۱۲ ظهر — ۵۰,۰۰۰ تومان
+                    </div>
+                  </div>
+                </label>
+                <label
+                  class="delivery-option"
+                  id="deliv2"
+                  onclick="selectDelivery(this)"
+                >
+                  <input type="radio" name="delivery" value="normal" />
+                  <div>
+                    <div class="delivery-label">📦 تحویل عادی (۲-۳ روز)</div>
+                    <div class="delivery-desc">
+                      ارسال به سراسر کشور — ۲۵,۰۰۰ تومان
+                    </div>
+                  </div>
+                </label>
+                <label
+                  class="delivery-option"
+                  id="deliv3"
+                  onclick="selectDelivery(this)"
+                >
+                  <input type="radio" name="delivery" value="pickup" />
+                  <div>
+                    <div class="delivery-label">🏪 تحویل حضوری (رایگان)</div>
+                    <div class="delivery-desc">
+                      تهران، خیابان ولیعصر — شنبه تا پنجشنبه ۹-۲۱
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+            <!-- روش پرداخت -->
+            <div class="checkout-form-section">
+              <h3>💳 روش پرداخت</h3>
+              <div class="delivery-options">
+                <label
+                  class="delivery-option selected"
+                  onclick="selectPayment(this)"
+                >
+                  <input type="radio" name="payment" value="online" checked />
+                  <div>
+                    <div class="delivery-label">💳 پرداخت آنلاین</div>
+                    <div class="delivery-desc">درگاه امن بانک ملت</div>
+                  </div>
+                </label>
+                <label class="delivery-option" onclick="selectPayment(this)">
+                  <input type="radio" name="payment" value="cod" />
+                  <div>
+                    <div class="delivery-label">💵 پرداخت در محل</div>
+                    <div class="delivery-desc">هنگام تحویل سفارش</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <!-- ORDER SUMMARY -->
+          <div class="order-summary">
+            <h3>📋 خلاصه سفارش</h3>
+            <div id="summaryItems"></div>
+            <div class="summary-total">
+              <span>جمع کل:</span
+              ><span id="summaryTotal" style="color: var(--rose)">۰ تومان</span>
+            </div>
+            <div style="font-size: 0.8rem; color: var(--lb); margin-top: 8px">
+              + هزینه ارسال بر اساس روش انتخابی
+            </div>
+            <button class="place-order-btn" onclick="placeOrder()">
+              ✅ ثبت و پرداخت سفارش
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ SUCCESS PAGE ═══ -->
+    <div class="page" id="page-success">
+      <div class="success-page">
+        <div class="success-icon">🎉</div>
+        <h2>سفارش شما ثبت شد!</h2>
+        <p>
+          سفارش شما با موفقیت ثبت شد. پیامک تأیید به زودی ارسال خواهد شد. ممنون
+          از خرید شما عزیز!
+        </p>
+        <div class="order-id" id="orderId">شماره سفارش: #NEG-00001</div>
+        <button
+          class="btn-primary"
+          onclick="
+            showPage('home');
+            window.scrollTo(0, 0);
+          "
+        >
+          🏠 بازگشت به خانه
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ ADMIN PAGE ═══ -->
+    <div class="page" id="page-admin">
+      <div class="admin-page">
+        <div class="back-btn" onclick="showPage('home')">
+          ← بازگشت به فروشگاه
+        </div>
+        <h2>⚙️ پنل مدیریت</h2>
+        <div class="admin-tabs">
+          <button
+            class="admin-tab active"
+            onclick="switchAdminTab(this, 'overview')"
+          >
+            📊 داشبورد
+          </button>
+          <button class="admin-tab" onclick="switchAdminTab(this, 'orders')">
+            📦 سفارشات
+          </button>
+          <button class="admin-tab" onclick="switchAdminTab(this, 'products')">
+            🍰 محصولات
+          </button>
+        </div>
+
+        <!-- OVERVIEW -->
+        <div class="admin-content active" id="tab-overview">
+          <div class="admin-grid">
+            <div class="admin-stat-card">
+              <div class="admin-stat-num" id="statProducts">8</div>
+              <div class="admin-stat-label">محصولات فعال</div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-num" id="statOrders">۱۲</div>
+              <div class="admin-stat-label">سفارشات امروز</div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-num" id="statRevenue">۴.۲M</div>
+              <div class="admin-stat-label">درآمد این ماه (تومان)</div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-num" id="statReviews">۲۴</div>
+              <div class="admin-stat-label">نظرات ثبت شده</div>
+            </div>
+          </div>
+          <h3
+            style="font-weight: 800; color: var(--brown); margin-bottom: 16px"
+          >
+            آخرین سفارشات
+          </h3>
+          <table class="admin-table" id="ordersTableOverview"></table>
+        </div>
+
+        <!-- ORDERS -->
+        <div class="admin-content" id="tab-orders">
+          <table class="admin-table" id="ordersTableFull"></table>
+        </div>
+
+        <!-- PRODUCTS MANAGEMENT -->
+        <div class="admin-content" id="tab-products">
+          <table class="admin-table" id="productsTable"></table>
+          <div class="add-product-form">
+            <h3>➕ افزودن محصول جدید</h3>
+            <div class="product-icon-picker" id="iconPicker"></div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">نام محصول</label
+                ><input
+                  class="form-input"
+                  id="newName"
+                  placeholder="مثلاً: باقلوا زعفرانی"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">دسته‌بندی</label>
+                <select class="form-select" id="newCat">
+                  <option value="traditional">سنتی</option>
+                  <option value="cake">کیک</option>
+                  <option value="chocolate">شکلات</option>
+                  <option value="cookie">کوکی</option>
+                  <option value="ice">بستنی</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">قیمت (تومان)</label
+                ><input
+                  class="form-input"
+                  id="newPrice"
+                  type="number"
+                  placeholder="180000"
+                  dir="ltr"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">برچسب</label>
+                <select class="form-select" id="newBadge">
+                  <option value="">بدون برچسب</option>
+                  <option value="new">✨ جدید</option>
+                  <option value="hot">🔥 پرفروش</option>
+                  <option value="sale">🏷️ تخفیف</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">توضیحات</label
+              ><input
+                class="form-input"
+                id="newDesc"
+                placeholder="توضیح کوتاه محصول..."
+              />
+            </div>
+            <button class="btn-primary" onclick="addNewProduct()">
+              ➕ افزودن محصول
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+      <div class="cart-header">
+        <h3>🛒 سبد خرید شما</h3>
+        <button class="close-cart" onclick="closeCart()">✕</button>
+      </div>
+      <div class="cart-items" id="cartItemsEl">
+        <p style="text-align: center; color: var(--lb); margin-top: 40px">
+          سبد شما خالی است 🍪
+        </p>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>جمع کل:</span><span id="cartTotal">۰ تومان</span>
+        </div>
+        <button class="checkout-btn" onclick="goCheckout()">
+          ادامه برای پرداخت →
+        </button>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <div class="lightbox-content" id="lightboxContent">🎂</div>
+      <div class="lightbox-name" id="lightboxName"></div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">✅ انجام شد!</div>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>
